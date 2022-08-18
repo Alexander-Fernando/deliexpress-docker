@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+// Archivvo config.js
+// const {URL_CONNECTION_MONGO} = require('./config.js');
 // Avisar la existencia del cliente
 const router = express.Router();
 
@@ -37,7 +39,7 @@ mongoose.connect(URI, {
 });
 
 app.get('/', (req, res) => {
-    res.json({msg: "RAAAAAAAAAAAAAAA"})
+    res.json({msg: "RAAAAAAAAAAAAAAA SERVER"})
 })
 
 const PORT = process.env.PORT || 5000

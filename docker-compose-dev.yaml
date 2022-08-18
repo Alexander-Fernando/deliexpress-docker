@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  backend:
+    container_name: serverDev
+    restart: always
+    build: 
+      context: ./server/
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - logs:/app/logs
+      - ./server:/app
+      - /app/node_modules
+    env_file: ./server/.env.dev
+    environment:
+      - NODE_ENV=development
+    links:
+      - database
+  frontend:
+    container_name: frontendDev
+    ports:
+      - "3000:3000"
+    build:
+      context: ./client/
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./client/src:/app/src
+    stdin_open: true
+    tty: true
+    links:
+      - backend
+  database:
+    container_name: databaseMongoDev
+    restart: always
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=developer
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  data:
+  logs:
+  mongo-data:
