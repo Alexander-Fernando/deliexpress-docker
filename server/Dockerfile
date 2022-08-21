@@ -1,13 +1,11 @@
-FROM node
+FROM node:14
 
 WORKDIR /app
 
-COPY package.json .
+COPY . /app
 
-RUN npm install --save --legacy-peer-deps
-
-COPY . .
+RUN npm install
 
 EXPOSE 5000
 
-CMD ["npm", "start"]
+CMD [ "npm", "run", "serve" ]
