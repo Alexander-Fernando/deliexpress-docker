@@ -23,12 +23,13 @@ bye_bye () {
 
 sudo apt-get update -y
 sudo apt-get upgrade -y
-sudo apt-get install snap
+sudo apt-get install snap -y
+sudo apt-get install dialog -y
 
 #Visual Studio Code
 if [ ! -x "$(command -v code)" ]; then
     progress "0" "Instalando Visual Studio Code"
-    sudo snap install --classic code -y
+    sudo snap install --classic code
     progress "10" "Visual Studio Code instalado"
 else
     progress "10" "Ya tienes instalado Visual Studio Code"
@@ -38,7 +39,7 @@ fi
 # Slack
 if [ ! -x "$(command -v slack)" ]; then
     progress "15" "Instalando Slack"
-    sudo snap install slack -y
+    sudo snap install slack
     progress "25" "Slack instalado"
 else
     progress "25" "Ya tienes instalado Slack"
@@ -47,7 +48,7 @@ fi
 # Postman
 if [ ! -x "$(command -v postman)" ]; then
     progress "30" "Instalando Postman"
-    sudo snap install postman -y
+    sudo snap install postman
     progress "40" "Postman instalado"
 else
     progress "40" "Ya tienes instalado Postman"
@@ -81,12 +82,13 @@ if [ ! -x "$(command -v docker)" ] && [ ! -x "$(command -v docker-compose)" ]; t
     gnupg \
     lsb-release
     sudo mkdir -p /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg -y
     echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo apt-get update -y
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+    sudo apt-get install docker-compose -y
     sudo docker run hello-world
     progress "100" "Docker instalado"
 else
