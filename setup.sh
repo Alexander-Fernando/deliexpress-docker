@@ -23,6 +23,7 @@ bye_bye () {
 
 sudo apt-get update -y
 sudo apt-get upgrade -y
+sudo apt-get install snap
 
 #Visual Studio Code
 if [ ! -x "$(command -v code)" ]; then
@@ -65,7 +66,7 @@ fi
 if [ ! -x "$(command -v mongodb-compass)" ]; then
     progress "70" "Instalando MongoDb Compass"
     wget https://downloads.mongodb.com/compass/mongodb-compass_1.28.1_amd64.deb
-    sudo apt install ./mongodb-compass_1.28.1_amd64.deb -y
+    sudo apt-get install ./mongodb-compass_1.28.1_amd64.deb -y
     progress "90" "MongoDb Compass instalado"
 else
     progress "90" "Ya tienes instalado MongoDb Compass"
