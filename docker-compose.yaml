@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  backend:
+    container_name: backendDeploy
+    build: 
+      context: ./server/
+      dockerfile: Dockerfile.deploy
+    volumes:
+      - logs:/app/logs
+      - ./server:/app
+      - /app/node_modules
+    restart: always
+  frontend:
+    container_name: frontendDeploy
+    build: 
+      context: ./client/
+      dockerfile: Dockerfile.deploy
+    volumes:
+      - ./client/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+  nginx:
+    container_name: nginx
+    image: linuxserver/swag
+    ports: 
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/config:/config
+      - ./nginx/default.conf:/config/nginx/site-confs/default
+      - ./nginx/ssl.conf:/config/nginx/ssl.conf
+    ENVIRONMENT:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+      - URL=deliexpress-docker.tk
+      - SUBDOMAINS=www,
+      - VALIDATION=http
+      - EMAIL=alexander.glzprd@hotmail.com
+volumes:
+  data:
+  logs:
