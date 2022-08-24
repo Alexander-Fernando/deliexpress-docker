@@ -27,6 +27,7 @@ sudo apt-get install snap -y
 sudo apt-get install dialog -y
 
 #Visual Studio Code
+#Editor de código open source que utilizaremos debido a que tiene una excelente adaptación a todo el entorno JavaScript
 if [ ! -x "$(command -v code)" ]; then
     progress "0" "Instalando Visual Studio Code"
     sudo snap install --classic code
@@ -37,6 +38,7 @@ fi
 
 
 # Slack
+# Software para comunicación del equipo, se contará con distintos canales para las distintas agrupaciones
 if [ ! -x "$(command -v slack)" ]; then
     progress "15" "Instalando Slack"
     sudo snap install slack
@@ -46,6 +48,7 @@ else
 fi
 
 # Postman
+# Software para hacer las peticiones HTTP de prueba al backend
 if [ ! -x "$(command -v postman)" ]; then
     progress "30" "Instalando Postman"
     sudo snap install postman
@@ -55,6 +58,7 @@ else
 fi
 
 # Guake
+# Terminal super user-friendly y con alta productividad
 if [ ! -x "$(command -v guake)" ]; then
     progress "45" "Instalando Guake"
     sudo apt-get install guake -y
@@ -64,6 +68,7 @@ else
 fi
 
 # MongoCompass
+# GUI para el gestor de base de datos MongoDB
 if [ ! -x "$(command -v mongodb-compass)" ]; then
     progress "70" "Instalando MongoDb Compass"
     wget https://downloads.mongodb.com/compass/mongodb-compass_1.28.1_amd64.deb
@@ -74,6 +79,7 @@ else
 fi
 
 # Docker
+# Contenedores para tener una estabilidad necesaria entre todo el equipo para tener las versiones de tecnologías de desarrollo neceserias y servicios
 if [ ! -x "$(command -v docker)" ] && [ ! -x "$(command -v docker-compose)" ]; then
     progress "95" "Instalando Docker"
     sudo apt-get install \
