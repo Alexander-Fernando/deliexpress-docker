@@ -4,7 +4,7 @@ services:
     container_name: backendDeploy
     build: 
       context: ./server/
-      dockerfile: Dockerfile.deploy
+      dockerfile: Dockerfile.prod
     volumes:
       - logs:/app/logs
       - ./server:/app
@@ -14,7 +14,7 @@ services:
     container_name: frontendDeploy
     build: 
       context: ./client/
-      dockerfile: Dockerfile.deploy
+      dockerfile: Dockerfile.prod
     volumes:
       - ./client/src:/app/src
     stdin_open: true
