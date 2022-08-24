@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  backend:
+    container_name: backendDeploy
+    build: 
+      context: ./server/
+      dockerfile: Dockerfile.deploy
+    volumes:
+      - logs:/app/logs
+      - ./server:/app
+      - /app/node_modules
+    restart: always
+  frontend:
+    container_name: frontendDeploy
+    build: 
+      context: ./client/
+      dockerfile: Dockerfile.deploy
+    volumes:
+      - ./client/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+  nginx:
+    build: 
+      context: ./nginx/
+      dockerfile: Dockerfile
+    ports: 
+      - 3000:80
+    restart: always
+volumes:
+  data:
+  logs:
